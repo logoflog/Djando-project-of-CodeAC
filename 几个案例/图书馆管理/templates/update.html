@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}修改图书{% endblock %}
+{% block content %}
+<div class='container'>
+    {% for message in messages %}
+        <div class='alert alert-{{message.tags}}'>{{ message }}</div>
+    {% endfor %}
+    <div class='row'>
+        <div class='col-md-12'>
+            <div class='panel panel-default'>
+                <div class='panel-heading' align=center>
+                <h3>修改图书</h3>
+                </div>
+            </div>
+            <form action='.' method='POST'>
+                {% csrf_token %}
+                <table>
+                    <tr>
+    				<td>请输入图书名称&emsp;</td>
+    				<td><input type="text" name="book_name" /></td>
+    				<td>&emsp;</td>
+    				<td><input type='submit' value='提交'></td>
+    				</tr>
+                </table>
+            </form>
+            <p>
+            {% if book_values %}
+    		<table border="3">
+    			<tr>
+    				<th width=80>图书编号</th>
+    				<th width="200">书名</th>
+    				<th width="80">作者</th>
+    				<th width=160>出版社</th>
+    				<th width="80">价格</th>
+    			</tr>
+    			{% for x in book_values %}
+				<tr>
+					<td width=80>{{x.bookId}}</td>
+					<td width=200>{{x.bookName}}</td>
+					<td width=80>{{x.bookAuthor}}</td>
+					<td width=160>{{x.bookPress}}</td>
+					<td width=80>{{x.bookPrice}}</td>
+					<td width=80>{{x.bookImage.name}}</td>
+					<td width=80><a href='/update_confirm?book_id={{x.bookId}}'>修改</a></td>
+				</tr>
+                {% endfor %}
+    		</table>            
+    		{% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

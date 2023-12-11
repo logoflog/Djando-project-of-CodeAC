@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}图书管理{% endblock %}
+{% block content %}
+<div class='container'>
+    {% for message in messages %}
+        <div class='alert alert-{{message.tags}}'>{{ message }}</div>
+    {% endfor %}
+    <div class='row'>
+        <div class='col-md-12'>
+            <div class='panel panel-default'>
+                <div class='panel-heading' align=center>
+                <h3>录入图书</h3>
+                </div>
+            </div>
+            <form action='.' method='POST' enctype="multipart/form-data">
+                {% csrf_token %}
+                <table>
+                    {{ book_form.as_table }}
+                </table>
+                <p>&nbsp;</p>
+                <input type='submit' value='提交'><br/>
+            </form>
+        </div>
+    </div>
+    
+</div>
+{% endblock %}
